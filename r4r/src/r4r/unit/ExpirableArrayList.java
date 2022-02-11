@@ -47,18 +47,18 @@ public class ExpirableArrayList<E> implements Serializable {
 	}
 
 	public void add(E item, long timeToLive) {
-		// expire();
+		 expire();
 		timeToLiveInM = timeToLive;
 		contents.add(new Element(item, System.currentTimeMillis() + timeToLive));
 	}
 
 	public long size() {
-		// expire();
+		 expire();
 		return contents.stream().filter(el -> el.expires > time).count();
 	}
 
 	public E get(int index) {
-		// expire();
+		 expire();
 		E e = contents.get(index).item;
 		if (!checkIsExpired(index)) {
 			resetTime(e, index);
@@ -68,7 +68,7 @@ public class ExpirableArrayList<E> implements Serializable {
 	}
 
 	public E remove(int index) {
-		// expire();
+		 expire();
 		E e = contents.get(index).item;
 		if (!checkIsExpired(index)) {
 			contents.remove(index);
